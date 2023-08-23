@@ -1,0 +1,660 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.MeetingRoomActivity">
+    <!--gone->visible 코드 변경-->
+    <FrameLayout
+        android:id="@+id/framelayout_meetingroom_main_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000"
+        android:visibility="gone">
+    <!--화면 레이아웃-->
+    <FrameLayout
+        android:id="@+id/framelayout_meetingroom_mainlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager2_meetingroom"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tablayout_meetingroom"
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            app:tabBackground="@drawable/meetingroom_viewpager_indicator_dot"
+            app:tabGravity="center"
+            android:visibility="gone"
+            app:tabIndicatorHeight="0dp"/>
+    </FrameLayout>
+
+    <!--top에 위치한 선택메뉴-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constlayout_meetingroom_top_view"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_gravity="top"
+        android:background="@drawable/meetingroom_view_line_bottom_gray">
+
+        <LinearLayout
+            android:id="@+id/linearlayout_meetingroom_speakerOnOff"
+            android:layout_width="40dp"
+            android:layout_height="42dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginLeft="5dp">
+            <ImageView
+                android:id="@+id/imageview_meetingroom_speakerOnOff"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/meetingroom_speaker_on_icon"/>
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/linearlayout_meetingroom_info_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/linearlayout_meetingroom_speakerOnOff"
+            app:layout_constraintRight_toLeftOf="@id/linearlayout_meetingroom_finish"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/textview_meetingroom_info"
+                android:text="OT"
+                android:textSize="19sp"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+            <ImageView
+                android:id="@+id/imgview_meetingroom_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/meetingroom_info_ck_btn_white"
+                app:layout_constraintLeft_toRightOf="@id/textview_meetingroom_info"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/linearlayout_meetingroom_finish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="5dp"
+            android:background="#FF0000"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+            <TextView
+                android:text="종료"
+                android:textSize="20dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical">
+        <!--바텀 바로 위에 위치한 주석작성 버튼 -->
+        <!--코드 변경 gone->visible-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/view_meetingroom_receiver_drawer_tools"
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            >
+            <!--주석 시작 버튼-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constlayout_meetingroom_receiver_canvas_start_btn"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/meetingroom_receiver_canvas_drawer_item"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/meetingroom_receiver_canvas_start_btn_border_black"
+                android:clickable="true">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/meetingroom_receiver_pen_icon_white"
+                    android:scaleType="fitXY"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <!--아이템 선택지-->
+            <LinearLayout
+                android:id="@+id/test"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/meetingroom_receiver_canvas_drawer_item"
+                android:orientation="horizontal"
+                android:weightSum="5">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+                <FrameLayout
+                    android:id="@+id/framelayout_meetingroom_receiver_color_toolbox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="bottom"
+                    android:visibility="invisible"
+                    >
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/dark_navay_200"
+                        android:layout_marginBottom="20dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp">
+                        <LinearLayout
+                            android:id="@+id/select_black"
+                            android:layout_width="38dp"
+                            android:layout_height="38dp"
+                            android:orientation="vertical"
+                            android:background="@drawable/meetingroom_receiver_drawer_color_oval_black"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                        <LinearLayout
+                            android:id="@+id/select_red"
+                            android:layout_width="38dp"
+                            android:layout_height="38dp"
+                            android:orientation="vertical"
+                            android:background="@drawable/meetingroom_receiver_drawer_color_oval_red"
+                            android:layout_marginTop="10dp"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/select_black"/>
+                        <LinearLayout
+                            android:id="@+id/select_yellow"
+                            android:layout_width="38dp"
+                            android:layout_height="38dp"
+                            android:orientation="vertical"
+                            android:background="@drawable/meetingroom_receiver_drawer_color_oval_yellow"
+                            android:layout_marginTop="10dp"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/select_red"/>
+                        <LinearLayout
+                            android:id="@+id/select_blue"
+                            android:layout_width="38dp"
+                            android:layout_height="38dp"
+                            android:orientation="vertical"
+                            android:background="@drawable/meetingroom_receiver_drawer_color_oval_blue"
+                            android:layout_marginTop="10dp"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/select_yellow"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <ImageView
+                        android:layout_gravity="center_horizontal|bottom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/meetingroom_receiver_downmark_icon_darknavy"/>
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/framelayout_meetingroom_receiver_width_toolbox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="bottom"
+                    android:visibility="invisible"
+                    >
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/dark_navay_200"
+                        android:layout_marginBottom="20dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp">
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/constlayout_select_width_25dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="38dp"
+                            android:orientation="vertical"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintBottom_toTopOf="@id/constlayout_select_width_20dp">
+                            <LinearLayout
+                                android:id="@+id/linearlayout_select_width_25dp"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:orientation="vertical"
+                                android:background="@drawable/meetingroom_receiver_drawer_width_iconeffect"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"/>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/constlayout_select_width_20dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="38dp"
+                            android:orientation="vertical"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintBottom_toTopOf="@id/constlayout_select_width_15dp">
+                            <LinearLayout
+                                android:id="@+id/linearlayout_select_width_20dp"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:background="@drawable/meetingroom_receiver_drawer_width_iconeffect"
+                                android:orientation="vertical"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"/>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/constlayout_select_width_15dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="38dp"
+                            android:orientation="vertical"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintBottom_toTopOf="@id/constlayout_select_width_10dp">
+                            <LinearLayout
+                                android:id="@+id/linearlayout_select_width_15dp"
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:background="@drawable/meetingroom_receiver_drawer_width_iconeffect"
+                                android:orientation="vertical"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"/>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/constlayout_select_width_10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="38dp"
+                            android:orientation="vertical"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent">
+                            <LinearLayout
+                                android:id="@+id/linearlayout_select_width_10dp"
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/meetingroom_receiver_drawer_width_iconeffect"
+                                android:orientation="vertical"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"/>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <ImageView
+                        android:layout_gravity="center_horizontal|bottom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/meetingroom_receiver_downmark_icon_darknavy"/>
+                </FrameLayout>
+
+
+            </LinearLayout>
+
+            <!--주석 아이템들 -->
+            <!--코드 변경 gone->visible-->
+            <LinearLayout
+                android:id="@+id/meetingroom_receiver_canvas_drawer_item"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:background="@color/dark_navay_700"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                android:weightSum="5"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+                <!--주석 취소-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constlayout_meetingroom_receiver_canvas_stop_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/meetingroom_receiver_canvas_cancle_btn_border_blue"
+                        android:gravity="center"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/meetingroom_receiver_pen_icon_white" />
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!--펜 선택-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintlayout_meetingroom_receiver_item_pen"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/imageView_meetingroom_receiver_pen"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:src="@drawable/meetingroom_receiver_pen_icon_effect"
+                        app:layout_constraintBottom_toTopOf="@id/textview_meetingroom_receiver_pen"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textview_meetingroom_receiver_pen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:text="펜"
+                        android:textColor="@color/meetingroom_pen_and_eraser_click_effect"
+                        android:textSize="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <!--지우개 선택-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintlayout_meetingroom_receiver_item_eraser"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/imageView_meetingroom_receiver_eraser"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:src="@drawable/meetingroom_receiver_eraser_icon_effect"
+                        app:layout_constraintBottom_toTopOf="@id/textview_meetingroom_receiver_eraser"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textview_meetingroom_receiver_eraser"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:text="지우개"
+                        android:textColor="@color/meetingroom_pen_and_eraser_click_effect"
+                        android:textSize="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!--색상-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintlayout_meetingroom_receiver_item_color"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:id="@+id/linearlayout_color"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:background="@drawable/meetingroom_receiver_drawer_color_oval_black"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toTopOf="@id/textview_color"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textview_color"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:text="색상"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <!--선 굵기 선택-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintlayout_meetingroom_receiver_item_width"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:src="@drawable/meetingroom_receiver_drawer_width_zigzag_icon_white"
+                        app:layout_constraintBottom_toTopOf="@id/textview_width"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textview_width"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:text="두께"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!--bottom에 위치한 선택메뉴-->
+        <LinearLayout
+            android:id="@+id/constlayout_meetingroom_bottom_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/meetingroom_view_line_top_gray"
+            android:layout_gravity="bottom"
+            android:weightSum="4"
+            android:orientation="horizontal">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constlayout_meetingroom_mike_parentview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                >
+                <ImageView
+                    android:id="@+id/imgaeView_meetingroom_mike"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/meetingroom_mike_icon_effect"/>
+                <TextView
+                    android:id="@+id/textview_meetingroom_mike"
+                    android:text="음소거"
+                    android:textSize="11sp"
+                    android:textColor="@color/white_gray_effect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/imgaeView_meetingroom_mike"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constlayout_meetingroom_share_parentview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                >
+
+                <ImageView
+                    android:id="@+id/imgaeView_meetingroom_share"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/meetingroom_share_icon_effect"/>
+
+                <TextView
+                    android:id="@+id/textview_meetingroom_share"
+                    android:text="공유"
+                    android:textSize="11sp"
+                    android:textColor="@color/meetingroom_share_click_text_effect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/imgaeView_meetingroom_share"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constlayout_meetingroom_participant_parentview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                >
+                <ImageView
+                    android:id="@+id/imgaeView_meetingroom_participant"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/meetingroom_participant_icon_effect"/>
+                <TextView
+                    android:id="@+id/textview_meetingroom_participant"
+                    android:text="참가자"
+                    android:textSize="11sp"
+                    android:textColor="@color/white_gray_effect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/imgaeView_meetingroom_participant"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constlayout_meetingroom_more_parentview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                >
+                <ImageView
+                    android:id="@+id/imgaeView_meetingroom_more"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/meetingroom_more_icon_effect"/>
+                <TextView
+                    android:id="@+id/textview_meetingroom_more"
+                    android:text="더보기"
+                    android:textSize="11sp"
+                    android:textColor="@color/white_gray_effect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/imgaeView_meetingroom_more"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+    </FrameLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constlayout_meetingroom_wait_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="30dp">
+        <TextView
+            android:id="@+id/textview_waitroom_notifitext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="잠시 기다려 주세요.호스트가 곧 귀하를 들어오게 할 것입니다."
+            android:textSize="21sp"
+            android:textColor="@color/black"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="나가기"
+            android:layout_marginTop="15dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_waitroom_notifitext"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

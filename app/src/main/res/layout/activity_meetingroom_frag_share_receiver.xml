@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="43dp"
+    android:paddingTop="43dp"
+    android:clickable="false"
+    android:focusable="false"
+    android:touchscreenBlocksFocus="false"
+    android:focusableInTouchMode="false"
+    android:filterTouchesWhenObscured="false"
+    android:layout_gravity="center">
+
+    <org.webrtc.SurfaceViewRenderer
+        android:id="@+id/surfaceview_meetingroom_frag_share_receiver"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+<!--    <com.example.ot.CanvasDepository.SurfaceViewRendererCustom-->
+<!--        android:id="@+id/surfaceview_meetingroom_frag_share_receiver"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        />-->
+    <FrameLayout
+        android:id="@+id/frameLayout_meetingroom_receiver_draw_canvas"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal|bottom"
+        android:visibility="gone">
+        <com.example.ot.CanvasDepository.ScreenShareReceiverDrawerView
+            android:id="@+id/view_meetingroom_receiver_sketchbook"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal|bottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </FrameLayout>
+
+</FrameLayout>

@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">OT</string>
+    <string name="waitUserNickname">%s님이 대기실에 입장했습니다.</string>
+</resources>
